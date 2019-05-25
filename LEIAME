@@ -1,0 +1,39 @@
+LEIAME
+
+João Marcelo Rossetto Fernandes da Silva - 9277833
+Bruno Eiti Ikeda - 8516239
+
+Por enquanto, a conexão por sockets está implementada, tal qual as threads. A principio, usei como base os algorítimos de socket do livro do Vrenios.
+A aplicação se baseia em um mensageiro. O servidor se inicia, então o cliente se inicia e se conecta ao servidor. O cliente digita uma mensagem e envia, fazendo com que seja printada através do servidor. Após conectar o socket, a thread é criada no proprio server, e então printa na tela a mensagem enviada pelo client, junto de uma mensagem com o "endereço" da thread atual, usado pela pthread para controlá-las. Foram declaradas 2 threads, e alternei entre elas. Na hora do pthread_create, contudo, está sendo inicializada uma nova thread, fazendo com que o "endereço" não se repita.
+
+No estado atual do EP para sua versão final resta a implementação de subprocessos mais bem definida, como o semáforo citado por vrenios, mecanismo de controle de threads, para controlar a criação e o uso delas, além da arquitetura mestre-escravo, e uma aplicação mais complexa do que esse simples "hello world".
+
+Para executar o código é necessário compilar os arquivos
+server.c
+client.c
+
+Como o arquivo server.c apresenta a biblioteca pthread, é necessário usar o seguinte comando:
+
+gcc server.c -lpthread -o nomeSaidaServidor , onde nome saída é o nome de sua escolha.
+
+O client.c pode ser compilado de maneira normal, com o seguinte comando:
+
+gcc client.c -o nomeSaidaCliente , onde nome saída é o nome de sua escolha.
+
+
+Após a compilação, é necessário inicializar primeiro o servidor, e só depois o client.
+
+Para rodar o servidor, é só executar ./nomeSaidaServidor em um terminal.
+
+Para rodar o cliente, deve ser aberto outro terminal separado, e então executado com o comando ./nomeSaidaCliente 127.0.0.1, para que o ip usado seja o do localhost.
+
+Após rodar os dois, deve ser enviada uma mensagem pelo cliente, usando o botão enter para o envio, e pode ser verificada na janela do servidor, junto de uma mensagem com o endereço da thread.
+
+Para sair da aplicação, basta digitar SAIR, em caixa alta mesmo, no cliente e enviar, que as duas aplicações vão parar de rodar.
+
+Durante meus testes, houve uma certa intermitencia de um erro de conexão, onde após enviar uma mensagem do cliente para o servidor, a instancia do cliente para de rodar. Não sei ao certo o porque disso, mas consegui solucionar alternando o valor da porta nos arquivos, encontrados logo em seu inicio, da seguinte forma:
+
+#define PORT 8000
+
+então peço para que caso ocorra esse erro, altere a porta para alguma de sua preferencia, por favor.
+
