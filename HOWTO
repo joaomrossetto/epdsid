@@ -1,8 +1,3 @@
-LEIAME
-
-João Marcelo Rossetto Fernandes da Silva - 9277833
-Bruno Eiti Ikeda - 8516239
-
 Por enquanto, a conexão por sockets está implementada, tal qual as threads. A principio, usei como base os algorítimos de socket do livro do Vrenios.
 A aplicação se baseia em um mensageiro. O servidor se inicia, então o cliente se inicia e se conecta ao servidor. O cliente digita uma mensagem e envia, fazendo com que seja printada através do servidor. Após conectar o socket, a thread é criada no proprio server, e então printa na tela a mensagem enviada pelo client, junto de uma mensagem com o "endereço" da thread atual, usado pela pthread para controlá-las. Foram declaradas 2 threads, e alternei entre elas. Na hora do pthread_create, contudo, está sendo inicializada uma nova thread, fazendo com que o "endereço" não se repita.
 
